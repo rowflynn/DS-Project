@@ -32,38 +32,65 @@ The Python library psycopg2 was used to connect to a locally hosted postgresql d
 
 1. Patients
 	a. patient_id   (pk)
+
 	b. patient_name
+
 	c. age
+
 	d. gender
+
 	e. blood_type
+
 2. Doctors
 	a. doctor_id   (pk)
+
 	b. doctor_name
+
 3. Hospital
 	a. hospital_id   (pk)
+
 	b. hospital_name
+
 4.  Medications
 	a. medication_id   (pk)
+
 	b. medication_name
+
 5.  Insurance_Providers
 	a. insurance_id  (pk)
+
 	b. insurance_name
+
 6.  Conditions
 	a. condition_id   (pk)
+
 	b. condition_name
+
 7. Admissions
 	a. admission_id  (pk)
+
 	b. patient_id (fk)
+
 	c. doctor_id (fk)
+
 	d. hospital_id (fk)
+
 	e. insurance_id (fk)
+
 	f. condition_id (fk)
+
 	g. medication_id (fk)
+
 	h. admission_date 
+
 	i. discharge_date 
+
 	j. admission_type 
+
 	k. test_results 
+
 	l. room_number
+    
 	m. billing_amount 
 
 The first 6 tables were populated with all unique entries of their respective field. Each entry into the database had exactly one entry in each field so there was no need to consider cases such as multiple conditions or medications per visit. The admissions table served as the central table and referenced all others while simultaneously storing all information relevant to exactly one visit.
