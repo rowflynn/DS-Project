@@ -1,9 +1,12 @@
 import pandas as pd
 import psycopg2
-import json
 
+import os
+from dotenv import load_dotenv
 
-df = pd.read_csv('healthcare_dataset.csv') # Read csv file
+load_dotenv()
+
+df = pd.read_csv('../data/healthcare_dataset.csv') # Read csv file
 
 # Format csv data for database entry
 df["Name"] = df["Name"].str.title()
@@ -13,12 +16,12 @@ df["Discharge Date"] = pd.to_datetime(df["Discharge Date"])
 
 # Connect to database
 conn = psycopg2.connect(
-        host="localhost",
-        port=5432,
-        dbname="healthcare",
-        user="rflynn",
-        password="yourpassword"
-    )
+    host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT"),
+    dbname=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD")
+)
 cur = conn.cursor()
 
 # Create database tables
@@ -260,5 +263,3 @@ def reset ():
     make_tables()
     populate_tables()
     
-
-reset()
